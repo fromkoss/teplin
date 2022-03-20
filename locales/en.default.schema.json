@@ -2630,6 +2630,69 @@
       "presets": {
         "name": "Collapsible content"
       }
+    },
+    "featured-products": {
+      "name": "Featured products",
+      "blocks": {
+        "product": {
+          "name": "Product",
+          "label": "Select product"
+        }
+      },
+      "settings": {
+        "title": {
+          "label": "Title"
+        }
+      },
+      "presets": {
+        "name": "Featured products"
+      }
+    },
+    "banner-list": {
+      "name": "List of banners",
+      "blocks": {
+        "banner": {
+          "name": "Banner",
+          "settings": {
+            "title": "Title",
+            "image": "Image",
+            "btn_text": "Button text",
+            "btn_link": "Button link"
+          }
+        }
+      },
+      "settings": {
+        "title": {
+          "label": "Title"
+        }
+      },
+      "presets": {
+        "name": "List of banners"
+      }
+    },
+    "content-cards": {
+      "name": "Content cards",
+      "blocks": {
+        "card": {
+          "name": "Card",
+          "settings": {
+            "image": "Image",
+            "title": "Title",
+            "text": "Description",
+            "color": "Background color",
+            "btn_text": "Button text",
+            "btn_link": "Button link"
+          }
+        }
+      },
+      "settings": {
+        "title": {
+          "label": "Title"
+        }
+      },
+      "presets": {
+        "name": "List of banners"
+      }
     }
   }
 }

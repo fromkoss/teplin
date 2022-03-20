@@ -1,0 +1,48 @@
+@import "mixins/_media-queries.scss";
+
+.banner-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  &__item{
+    width: calc(50% - 5px);
+    position: relative;
+    margin-bottom: 10px;
+    &-image{
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    &-content{
+      position: absolute;
+      bottom: 0;
+      padding: 0 30px 40px;
+      text-align: center;
+      color: rgb(var(--color-background));
+    }
+    &-title{
+      font-weight: 400;
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 21px;
+    }
+    &-link{
+      font-size: 1rem;
+      line-height: 1;
+      a{
+        font-size: 1rem;
+        line-height: 1;
+        font-weight: 400;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: rgb(var(--color-background));
+        padding-bottom: 4px;
+        border-bottom: 1px solid;
+        &:hover{
+          border-color: transparent;
+        }
+      }
+    }
+  }
+}

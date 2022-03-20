@@ -1,0 +1,80 @@
+{{ 'section-banner-list.min.css' | asset_url | stylesheet_tag }}
+
+<section>
+  <div class="page-width banner-list">
+      {%- for block in section.blocks -%}
+          {%- assign banner = block.settings -%}
+          {%- if banner.image != blank -%}
+          <div class="banner-list__item">
+              <img
+                      srcset="{%- if banner.image.width >= 375 -%}{{ banner.image | image_url: width: 375 }} 375w,{%- endif -%}
+                          {%- if banner.image.width >= 750 -%}{{ banner.image | image_url: width: 750 }} 750w,{%- endif -%}
+                          {%- if banner.image.width >= 1100 -%}{{ banner.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                          {{ banner.image | image_url }} {{ banner.image.width }}w"
+                      src="{{ banner.image | image_url: width: 1500 }}"
+                      loading="lazy"
+                      class="banner-list__item-image"
+                      alt="{{ banner.image.alt | escape }}"
+              >
+             <div class="banner-list__item-content">
+                 {%- if banner.title != blank -%}
+                     <div class="banner-list__item-title">
+                         {{ banner.title }}
+                     </div>
+                 {%- endif -%}
+                 {%- if banner.btn_link != blank and banner.btn_text != blank -%}
+                     <div class="banner-list__item-link">
+                         <a href="{{ banner.btn_link }}">
+                             {{ banner.btn_text }}
+                         </a>
+                     </div>
+                 {%- endif -%}
+             </div>
+          </div>
+          {%- endif -%}
+      {%- endfor -%}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+"name": "t:sections.banner-list.name",
+"tag": "section",
+"class": "section section-banner-list",
+"blocks": [
+{
+"type": "banner",
+"name": "t:sections.banner-list.blocks.banner.name",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "t:sections.banner-list.blocks.banner.title"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "t:sections.banner-list.blocks.banner.image"
+},
+{
+"type": "text",
+"id": "btn_text",
+"label": "Button text"
+},
+{
+"type": "url",
+"id": "btn_link",
+"label": "Button link"
+}
+]
+}
+],
+"presets": [
+{
+"name": "t:sections.banner-list.presets.name"
+}
+]
+}
+{% endschema %}
