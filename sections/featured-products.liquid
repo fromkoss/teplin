@@ -1,0 +1,49 @@
+
+{{ 'section-featured-products.min.css' | asset_url | stylesheet_tag }}
+
+<section>
+  <div class="page-width section-{{ section.id }}-padding featured-products">
+      <h2 class="featured-products__title">{{ section.settings.title }}</h2>
+      {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item grid--1-col slider__slide">
+              {{ product.title }}
+          </li>
+      {%- endfor -%}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+"name": "t:sections.featured-products.name",
+"tag": "section",
+"class": "section section-featured-products",
+"blocks": [
+{
+"type": "product",
+"name": "t:sections.featured-products.blocks.product.name",
+"settings": [
+{
+"type": "product",
+"id": "product",
+"label": "t:sections.featured-products.blocks.product.label"
+}
+]
+}
+],
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "t:sections.featured-products.settings.title.label"
+}
+],
+"presets": [
+{
+"name": "t:sections.featured-products.presets.name"
+}
+]
+}
+{% endschema %}

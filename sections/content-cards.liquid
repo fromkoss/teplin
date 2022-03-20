@@ -1,0 +1,92 @@
+{{ 'section-banner-list.min.css' | asset_url | stylesheet_tag }}
+
+<section>
+  <div class="page-width banner-list">
+      {%- for block in section.blocks -%}
+          {%- assign banner = block.settings -%}
+          {%- if banner.image != blank -%}
+          <div class="banner-list__item">
+              <img
+                      srcset="{%- if banner.image.width >= 375 -%}{{ banner.image | image_url: width: 375 }} 375w,{%- endif -%}
+                          {%- if banner.image.width >= 750 -%}{{ banner.image | image_url: width: 750 }} 750w,{%- endif -%}
+                          {%- if banner.image.width >= 1100 -%}{{ banner.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                          {{ banner.image | image_url }} {{ banner.image.width }}w"
+                      src="{{ banner.image | image_url: width: 1500 }}"
+                      loading="lazy"
+                      class="banner-list__item-image"
+                      alt="{{ banner.image.alt | escape }}"
+              >
+             <div class="banner-list__item-content">
+                 {%- if banner.title != blank -%}
+                     <div class="banner-list__item-title">
+                         {{ banner.title }}
+                     </div>
+                 {%- endif -%}
+                 {%- if banner.btn_link != blank and banner.btn_text != blank -%}
+                     <div class="banner-list__item-link">
+                         <a href="{{ banner.btn_link }}">
+                             {{ banner.btn_text }}
+                         </a>
+                     </div>
+                 {%- endif -%}
+             </div>
+          </div>
+          {%- endif -%}
+      {%- endfor -%}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+"name": "t:sections.content-cards.name",
+"tag": "section",
+"class": "section content-cards",
+"max_blocks": 4,
+"blocks": [
+{
+"type": "card",
+"name": "t:sections.content-cards.blocks.card.name",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "t:sections.content-cards.blocks.card.title"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "t:sections.content-cards.blocks.card.image"
+},
+{
+"type": "color",
+"id": "bg_color",
+"label": "t:sections.content-cards.blocks.card.color",
+"default": "#00966E"
+},
+{
+"type": "text",
+"id": "text",
+"label": "t:sections.content-cards.blocks.card.text"
+},
+{
+"type": "text",
+"id": "btn_text",
+"label": "t:sections.content-cards.blocks.card.btn_text"
+},
+{
+"type": "url",
+"id": "btn_link",
+"label": "t:sections.content-cards.blocks.card.btn_link"
+}
+]
+}
+],
+"presets": [
+{
+"name": "t:sections.content-cards.presets.name"
+}
+]
+}
+{% endschema %}
