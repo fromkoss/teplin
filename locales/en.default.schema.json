@@ -2676,7 +2676,10 @@
           "name": "Banner",
           "settings": {
             "title": "Title",
-            "image": "Image",
+            "image": {
+              "label": "Image",
+              "info": "Recommended size for image is 675x800"
+            },
             "btn_text": "Button text",
             "btn_link": "Button link"
           }
@@ -2697,7 +2700,10 @@
         "card": {
           "name": "Card",
           "settings": {
-            "image": "Image",
+            "image": {
+              "label": "Image",
+              "info": "Recommended size for image is 312x224"
+            },
             "title": "Title",
             "text": "Description",
             "color": "Background color",
