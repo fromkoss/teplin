@@ -1,49 +1,150 @@
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-featured-products.min.css' | asset_url }}" media="print" onload="this.media='all'">
 
-{{ 'section-featured-products.min.css' | asset_url | stylesheet_tag }}
+{%- liquid
+    assign products_to_display = section.settings.collection.all_products_count
 
-<section>
-  <div class="page-width section-{{ section.id }}-padding featured-products">
-      <h2 class="featured-products__title">{{ section.settings.title }}</h2>
-      {%- for block in section.blocks -%}
-          {%- assign product = block.settings.product -%}
-          <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item grid--1-col slider__slide">
-              {{ product.title }}
-          </li>
-      {%- endfor -%}
+    if section.settings.collection.all_products_count > section.settings.products_to_show
+        assign products_to_display = section.settings.products_to_show
+        assign more_in_collection = true
+    endif
+-%}
 
-  </div>
-</section>
+<div class="page-width featured-products">
+    {%- if section.settings.title != blank -%}
+        <h2 class="featured-products__title heading-{{ section.settings.title_size }} text-{{ section.settings.title_align }}">
+            {{ section.settings.title | escape }}
+        </h2>
+    {%- endif -%}
+    <slider-component class="slider-mobile-gutter slider__container">
+        <ul id="Slider-{{ section.id }}" class="grid slider slider--desktop" role="list" aria-label="{{ 'sections.featured_collection.slider' | t }}">
+            {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+                <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item slider__slide featured-products__item">
+                    <product-add-btn
+                        data-id="{{ product.selected_or_first_available_variant.id }}"
+                    >
+                        <img
+                                src="{{ product.featured_media | image_url: width: 420 }}"
+                                alt="{{ product.featured_media.alt | escape }}"
+                                class="featured-products__item-image"
+                                loading="lazy"
+                                width="{{ product.featured_media.width }}"
+                                height="{{ card_product.featured_media.height }}"
+                        >
+                        <div class="featured-products__item-content">
+                            <div class="featured-products__item-title">
+                                {{ product.title | escape }}
+                            </div>
+                            <div class="featured-products__item-price">
+                                {% render 'price' %}
+                            </div>
+                        </div>
+                    </product-add-btn>
+                </li>
+            {%- else -%}
+                {%- for i in (1..4) -%}
+                    <li class="grid__item">
+                        {% render 'card-product', show_vendor: section.settings.show_vendor %}
+                    </li>
+                {%- endfor -%}
+            {%- endfor -%}
+        </ul>
+        <div class="slider-buttons no-js-hidden">
+            <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="Slider-{{ section.id }}">{% render 'icon-long-arrow' %}</button>
+            <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}" aria-controls="Slider-{{ section.id }}">{% render 'icon-long-arrow' %}</button>
+        </div>
+    </slider-component>
+    {%- if section.settings.show_view_all and more_in_collection -%}
+        <div class="featured-products__btn-container">
+            <a href="{{ section.settings.collection.url }}"
+               class="featured-products__btn"
+               aria-label="{{ 'sections.featured_products.view_all_label' | t: collection_name: section.settings.collection.title }}"
+            >
+                {{ 'sections.featured_collection.view_all' | t }}
+            </a>
+        </div>
+    {%- endif -%}
+</div>
 
+<script src="{{ 'product-add-btn.min.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
-"name": "t:sections.featured-products.name",
-"tag": "section",
-"class": "section section-featured-products",
-"blocks": [
-{
-"type": "product",
-"name": "t:sections.featured-products.blocks.product.name",
-"settings": [
-{
-"type": "product",
-"id": "product",
-"label": "t:sections.featured-products.blocks.product.label"
-}
-]
-}
-],
-"settings": [
-{
-"type": "text",
-"id": "title",
-"label": "t:sections.featured-products.settings.title.label"
-}
-],
-"presets": [
-{
-"name": "t:sections.featured-products.presets.name"
-}
-]
+  "name": "t:sections.featured-products.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "t:sections.featured-products.presets.settings.title",
+      "label": "t:sections.featured-products.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "t:sections.featured-products.settings.title_size.label",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.featured-products.settings.title_size.options__1"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.featured-products.settings.title_size.options__2"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.featured-products.settings.title_size.options__3"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "title_align",
+      "label": "t:sections.featured-products.settings.title_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.featured-products.settings.title_align.options__1"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.featured-products.settings.title_align.options__2"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.featured-products.settings.title_align.options__3"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-products.settings.collection.label"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.featured-products.settings.products_to_show.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "t:sections.featured-products.settings.show_view_all.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-products.presets.name"
+    }
+  ]
 }
 {% endschema %}

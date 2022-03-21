@@ -1,4 +1,137 @@
 @import "mixins/_media-queries.scss";
+@import "mixins/_components.scss";
 
 .featured-products{
+  .slider--desktop:not(.slider--tablet) + .slider-buttons{
+    display: block;
+  }
+  product-add-btn{
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  &__title{
+    margin: 0 0 60px;
+  }
+  &__btn{
+    @include btn-primary();
+    &-container{
+      margin-top: 48px;
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 1.6rem;
+    }
+  }
+  &__item{
+    &-image{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    &-content{
+      display: flex;
+      padding: 20px 22px;
+      flex-basis: 100%;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: rgb(var(--color-base-solid-button-labels));
+    }
+    &-title{
+      font-family: 'GT Super Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+    }
+    &-price{
+      padding: 10px 0 0 5px;
+      text-align: right;
+      .price{
+        font-weight: 400;
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+        letter-spacing: 0.25em;
+      }
+    }
+  }
+  .slider{
+    position: relative;
+    flex-wrap: inherit;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    column-gap: 1px;
+    scroll-padding-left: 0;
+    margin: 0;
+    &__slide{
+      width: calc(33.3% - 1px * 2 / 3);
+      &:first-child {
+        margin-left: 0;
+        scroll-margin-left: 0;
+      }
+    }
+    &__container{
+      padding: 0 50px;
+      position: relative;
+    }
+    &-button{
+      position: absolute;
+      top: 50%;
+      width: 30px;
+      padding: 0;
+      transform: translateY(-50%);
+      .icon{
+        width: 30px;
+        height: auto;
+      }
+      &--prev{
+        left: 0;
+        .icon{
+          transform: none;
+        }
+        &:not([disabled]):hover{
+          .icon{
+            transform: none;
+          }
+        }
+      }
+      &--next{
+        right: 0;
+        .icon{
+          transform: rotate(180deg);
+        }
+        &:not([disabled]):hover{
+          .icon{
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+  @include to-md{
+    .slider{
+      &__slide{
+        width: calc(50% - 1px / 2);
+        max-width: 100%;
+      }
+    }
+  }
+  @include to-sm{
+    &__title{
+      margin: 0 0 40px;
+    }
+    .slider{
+      &__slide{
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+    &__btn{
+      &-container{
+        margin-top: 30px;
+      }
+    }
+  }
 }

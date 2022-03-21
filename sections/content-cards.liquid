@@ -1,92 +1,142 @@
-{{ 'section-banner-list.min.css' | asset_url | stylesheet_tag }}
+{{ 'section-content-cards.min.css' | asset_url | stylesheet_tag }}
 
-<section>
-  <div class="page-width banner-list">
-      {%- for block in section.blocks -%}
-          {%- assign banner = block.settings -%}
-          {%- if banner.image != blank -%}
-          <div class="banner-list__item">
-              <img
-                      srcset="{%- if banner.image.width >= 375 -%}{{ banner.image | image_url: width: 375 }} 375w,{%- endif -%}
-                          {%- if banner.image.width >= 750 -%}{{ banner.image | image_url: width: 750 }} 750w,{%- endif -%}
-                          {%- if banner.image.width >= 1100 -%}{{ banner.image | image_url: width: 1100 }} 1100w,{%- endif -%}
-                          {{ banner.image | image_url }} {{ banner.image.width }}w"
-                      src="{{ banner.image | image_url: width: 1500 }}"
-                      loading="lazy"
-                      class="banner-list__item-image"
-                      alt="{{ banner.image.alt | escape }}"
-              >
-             <div class="banner-list__item-content">
-                 {%- if banner.title != blank -%}
-                     <div class="banner-list__item-title">
-                         {{ banner.title }}
-                     </div>
-                 {%- endif -%}
-                 {%- if banner.btn_link != blank and banner.btn_text != blank -%}
-                     <div class="banner-list__item-link">
-                         <a href="{{ banner.btn_link }}">
-                             {{ banner.btn_text }}
-                         </a>
-                     </div>
-                 {%- endif -%}
-             </div>
-          </div>
-          {%- endif -%}
-      {%- endfor -%}
-
-  </div>
-</section>
+<div class="page-width content-cards">
+    {%- if section.settings.title != blank -%}
+        <h2 class="content-cards__title heading-{{ section.settings.title_size }} text-{{ section.settings.title_align }}">
+            {{ section.settings.title | escape }}
+        </h2>
+    {%- endif -%}
+    <div class="content-cards__list">
+        {%- for block in section.blocks -%}
+            {%- assign card = block.settings -%}
+            {%- if card.image != blank -%}
+                <div class="content-cards__item" style="background-color: {{ card.bg_color }}">
+                    <img
+                            src="{{ card.image | image_url: width: 375 }}"
+                            loading="lazy"
+                            class="content-cards__item-image"
+                            alt="{{ card.image.alt | escape }}"
+                    >
+                    {%- if card.title != blank -%}
+                        <div class="content-cards__item-title">
+                            {{ card.title }}
+                        </div>
+                    {%- endif -%}
+                    {%- if card.text != blank -%}
+                        <div class="content-cards__item-text">
+                            {{ card.text }}
+                        </div>
+                    {%- endif -%}
+                    {%- if card.btn_link != blank and card.btn_text != blank -%}
+                        <div class="content-cards__item-link">
+                            <a href="{{ card.btn_link }}">
+                                {{ card.btn_text }}
+                            </a>
+                        </div>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+        {%- endfor -%}
+    </div>
+</div>
 
 
 {% schema %}
 {
-"name": "t:sections.content-cards.name",
-"tag": "section",
-"class": "section content-cards",
-"max_blocks": 4,
-"blocks": [
-{
-"type": "card",
-"name": "t:sections.content-cards.blocks.card.name",
-"settings": [
-{
-"type": "text",
-"id": "title",
-"label": "t:sections.content-cards.blocks.card.title"
-},
-{
-"type": "image_picker",
-"id": "image",
-"label": "t:sections.content-cards.blocks.card.image"
-},
-{
-"type": "color",
-"id": "bg_color",
-"label": "t:sections.content-cards.blocks.card.color",
-"default": "#00966E"
-},
-{
-"type": "text",
-"id": "text",
-"label": "t:sections.content-cards.blocks.card.text"
-},
-{
-"type": "text",
-"id": "btn_text",
-"label": "t:sections.content-cards.blocks.card.btn_text"
-},
-{
-"type": "url",
-"id": "btn_link",
-"label": "t:sections.content-cards.blocks.card.btn_link"
-}
-]
-}
-],
-"presets": [
-{
-"name": "t:sections.content-cards.presets.name"
-}
-]
+  "name": "t:sections.content-cards.name",
+  "tag": "section",
+  "class": "section content-cards",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.content-cards.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "t:sections.content-cards.settings.title_size.label",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.content-cards.settings.title_size.options__1"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.content-cards.settings.title_size.options__2"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.content-cards.settings.title_size.options__3"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "title_align",
+      "label": "t:sections.content-cards.settings.title_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.content-cards.settings.title_align.options__1"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.content-cards.settings.title_align.options__2"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.content-cards.settings.title_align.options__3"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "t:sections.content-cards.blocks.card.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.content-cards.blocks.card.settings.title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.content-cards.blocks.card.settings.image"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "t:sections.content-cards.blocks.card.settings.color",
+          "default": "#00966E"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.content-cards.blocks.card.settings.text"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "t:sections.content-cards.blocks.card.settings.btn_text"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "t:sections.content-cards.blocks.card.settings.btn_link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.content-cards.presets.name"
+    }
+  ]
 }
 {% endschema %}

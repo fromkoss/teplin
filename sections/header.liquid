@@ -24,6 +24,11 @@
     margin-left: -1.2rem;
   }
 
+  img.header__heading-logo{
+    width: {{ section.settings.logo.width }}px;
+    max-width: 100%;
+  }
+
   @media screen and (min-width: 990px) {
     header-drawer {
       display: none;
@@ -554,11 +559,7 @@
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {%- liquid
-          if cart == empty
-            render 'icon-cart-empty'
-          else
-            render 'icon-cart'
-          endif
+          render 'icon-cart'
         -%}
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
@@ -771,9 +772,13 @@
         {
           "value": "top-center",
           "label": "t:sections.header.settings.logo_position.options__3.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.logo_position.options__4.label"
         }
       ],
-      "default": "middle-left",
+      "default": "left",
       "label": "t:sections.header.settings.logo_position.label",
       "info": "t:sections.header.settings.logo_position.info"
     },

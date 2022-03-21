@@ -1,48 +1,71 @@
 @import "mixins/_media-queries.scss";
+@import "mixins/_components.scss";
 
-.banner-list{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.content-cards{
+  &__list{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  &__title{
+    margin-bottom: 60px;
+  }
   &__item{
-    width: calc(50% - 5px);
-    position: relative;
-    margin-bottom: 10px;
+    width: calc((100% - 30px)/4);
+    padding: 10px 10px 60px;
+    text-align: center;
     &-image{
-      max-width: 100%;
+      width: 100%;
       height: auto;
       display: block;
-    }
-    &-content{
-      position: absolute;
-      bottom: 0;
-      padding: 0 30px 40px;
-      text-align: center;
-      color: rgb(var(--color-background));
+      margin-bottom: 30px;
     }
     &-title{
+      font-family: 'GT Super Display', serif;
       font-weight: 400;
-      font-size: 6.4rem;
-      line-height: 1;
-      margin-bottom: 21px;
+      font-size: 3.2rem;
+      line-height: 3.2rem;
+      margin-bottom: 10px;
+    }
+    &-text{
+      font-family: 'GT Super Display', serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1.8rem;
+      margin-bottom: 16px;
     }
     &-link{
-      font-size: 1rem;
-      line-height: 1;
+      font-size: 1.2rem;
+      line-height: 1.2rem;
       a{
-        font-size: 1.6rem;
-        line-height: 1;
-        font-weight: 400;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: rgb(var(--color-background));
-        padding-bottom: 4px;
-        border-bottom: 1px solid;
-        &:hover{
-          border-color: transparent;
-        }
+        @include btn-primary();
+        font-size: 1.2rem;
+        line-height: 1.2rem;
       }
+    }
+  }
+  @include to-md{
+    &__item{
+      width: calc(50% - 5px);
+    }
+  }
+  @include to-sm{
+    &__item{
+      &-image{
+        margin-bottom: 10px;
+      }
+      &-title{
+        font-size: 2rem;
+        line-height: 2rem;
+      }
+      &-text{
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+      }
+    }
+    &__title{
+      margin: 0 0 40px;
     }
   }
 }

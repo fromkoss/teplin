@@ -28,9 +28,53 @@
       ],
       "settings": {
       }
+    },
+    "content-cards": {
+      "type": "content-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Make a scene.",
+            "image": "shopify:\/\/shop_images\/Rectangle_289.jpg",
+            "bg_color": "#00966e",
+            "text": "Everything you need for a great party, from decor to drinks and games.",
+            "btn_text": "find your scene",
+            "btn_link": "\/"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Make a scene.",
+            "image": "shopify:\/\/shop_images\/Rectangle_289.jpg",
+            "bg_color": "#E3FF21",
+            "text": "Everything you need for a great party, from decor to drinks and games.",
+            "btn_text": "find your scene",
+            "btn_link": "\/"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ],
+      "settings": {
+      }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Featured products",
+        "collection": "all",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
     }
   },
   "order": [
-    "banner-list"
+    "banner-list",
+    "content-cards",
+    "featured-products"
   ]
 }

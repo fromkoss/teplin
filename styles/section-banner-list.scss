@@ -1,13 +1,13 @@
 @import "mixins/_media-queries.scss";
+@import "mixins/_components.scss";
 
 .banner-list{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 10px;
   &__item{
     width: calc(50% - 5px);
     position: relative;
-    margin-bottom: 10px;
     &-image{
       max-width: 100%;
       height: auto;
@@ -18,31 +18,33 @@
       bottom: 0;
       padding: 0 30px 40px;
       text-align: center;
-      color: rgb(var(--color-background));
+      color: rgb(var(--color-base-solid-button-labels));
     }
     &-title{
+      font-family: 'GT Super Display', serif;
       font-weight: 400;
-      font-size: 4rem;
-      line-height: 1;
+      font-size: 6.4rem;
+      line-height: 6.4rem;
       margin-bottom: 21px;
     }
     &-link{
-      font-size: 1rem;
-      line-height: 1;
+      font-size: 1.6rem;
+      line-height: 1.6rem;
       a{
-        font-size: 1rem;
-        line-height: 1;
-        font-weight: 400;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: rgb(var(--color-background));
-        padding-bottom: 4px;
-        border-bottom: 1px solid;
-        &:hover{
-          border-color: transparent;
-        }
+        @include btn-primary(rgb(var(--color-base-solid-button-labels)));
       }
+    }
+  }
+  @include to-md{
+    &__item{
+      &-title{
+        font-size: 3rem;
+      }
+    }
+  }
+  @include to-sm{
+    &__item{
+      width: 100%;
     }
   }
 }

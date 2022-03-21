@@ -1,0 +1,133 @@
+@import "mixins/_media-queries.scss";
+@import "mixins/_components.scss";
+@import "mixins/_fonts.scss";
+
+@include font-face('GT Super Display', GT-Super-Display-Light, null, normal, otf woff2 woff ttf);
+@include font-face('GT Super Display', GT-Super-Display-Light-Italic, null, italic, otf woff2 woff ttf);
+@include font-face('GT Super Display', GT-Super-Display-Medium, 500, normal, otf woff2 woff ttf);
+@include font-face('GT Super Display', GT-Super-Display-Medium-Italic, 500, italic, otf woff2 woff ttf);
+
+@include font-face('GT Super Text Book', GT-Super-Text-Book, null, normal, otf woff2 woff ttf);
+@include font-face('GT Super Text Book', GT-Super-Text-Book-Italic, null, italic, otf woff2 woff ttf);
+
+@include font-face('Platform', Platform-Regular, null, normal, otf woff2 woff);
+@include font-face('Platform', Platform-Medium, 500, normal, otf woff2 woff);
+
+body {
+  font-family: 'Platform', var(--font-body-family), serif;
+}
+
+.template-index .content-for-layout{
+  .shopify-section{
+    padding: 0 0 80px;
+    &:first-child{
+      padding-top: 80px;
+    }
+    &:last-child{
+      padding: 0 0 32px;
+    }
+  }
+}
+
+.section-header:not(.shopify-section-header-sticky){
+  .header-wrapper--border-bottom{
+    border-bottom-color: transparent;
+  }
+}
+
+.header{
+  &__menu-item{
+    padding: 4.1rem 1.75rem;
+    span{
+      text-transform: uppercase;
+    }
+  }
+  &__icon{
+    &--cart{
+      .icon{
+        height: 20px;
+        width: auto;
+      }
+    }
+  }
+}
+
+/* Headings */
+.heading-sm{
+  @include heading(2rem);
+}
+.heading-md{
+  @include heading(4rem);
+}
+.heading-lg{
+  @include heading(8rem);
+}
+
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.text-left{
+  text-align: left;
+}
+
+@include to-sm{
+  .heading-sm{
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+  }
+  .heading-md{
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+  }
+  .heading-lg{
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .template-index .content-for-layout{
+    .shopify-section{
+      padding: 0 0 40px;
+      &:first-child{
+        padding-top: 40px;
+      }
+      &:last-child{
+        padding: 0 0 4px;
+      }
+    }
+  }
+}
+
+@include from-width(750px) {
+  .page-width {
+    padding: 0 4rem;
+  }
+}
+
+@include from-width(990px) {
+  .header{
+    $this: &;
+
+    &--has-menu:not(#{$this}--left) {
+      padding-bottom: 0;
+    }
+    &--left:not(#{$this}--has-menu){
+      grid-template-areas:
+      'heading icons'
+      'navigation navigation';
+      grid-template-columns: 1fr auto;
+    }
+    &--left {
+      grid-template-areas: 'heading navigation icons';
+      grid-template-columns: 1fr auto auto;
+      column-gap: 2rem;
+    }
+    &#{$this}--left {
+      #{$this}__inline-menu {
+        margin-top: 0;
+      }
+    }
+  }
+}
