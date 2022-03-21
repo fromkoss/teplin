@@ -17,33 +17,33 @@
         "card_2": {
           "type": "card",
           "settings": {
-            "title": "Make a scene.",
-            "image": "shopify:\/\/shop_images\/Rectangle_289.jpg",
+            "title": "Make it extra.",
+            "image": "shopify:\/\/shop_images\/Rectangle_289_10f9c8e7-f05b-4992-914c-849cdfe7af94.jpg",
             "bg_color": "#85abbd",
-            "text": "Everything you need for a great party, from decor to drinks and games.",
-            "btn_text": "Find your scene",
+            "text": "Once you’ve chosen a scene, you can dial it up with fun a la carte add-ons.",
+            "btn_text": "shop party supplies",
             "btn_link": "\/"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "title": "Make a scene.",
-            "image": "shopify:\/\/shop_images\/Rectangle_289.jpg",
+            "title": "Make it joyful.",
+            "image": "shopify:\/\/shop_images\/Rectangle_2891.jpg",
             "bg_color": "#e3ff21",
-            "text": "Everything you need for a great party, from decor to drinks and games.",
-            "btn_text": "find your scene",
+            "text": "Create the arrangement of your dreams with DIY kits from Wild & Flowers.",
+            "btn_text": "shop florals",
             "btn_link": "\/"
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
-            "title": "Make a scene.",
-            "image": "shopify:\/\/shop_images\/Rectangle_289.jpg",
+            "title": "Make it happen.",
+            "image": "shopify:\/\/shop_images\/Rectangle_2892.jpg",
             "bg_color": "#bf91c4",
-            "text": "Everything you need for a great party, from decor to drinks and games.",
-            "btn_text": "Find your scene",
+            "text": "Need a bartender, caterer, or DJ? Just add to cart. It’s that easy.",
+            "btn_text": "browse vendors",
             "btn_link": "\/"
           }
         }
@@ -76,9 +76,9 @@
           "type": "banner",
           "settings": {
             "title": "Housewarming Gifts for the Host",
-            "image": "shopify:\/\/shop_images\/Rectangle_324.jpg",
-            "btn_text": "",
-            "btn_link": ""
+            "image": "shopify:\/\/shop_images\/Rectangle_324_9192cdb3-7be7-442d-a1cd-1b90572cbab1.jpg",
+            "btn_text": "shop the scene",
+            "btn_link": "\/"
           }
         }
       },
@@ -92,7 +92,7 @@
     "featured-products": {
       "type": "featured-products",
       "settings": {
-        "title": "Featured products",
+        "title": "PARTY A LA CARTE",
         "title_size": "lg",
         "title_align": "center",
         "collection": "all",
