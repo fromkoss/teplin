@@ -17,6 +17,11 @@ if (!customElements.get('product-add-btn')) {
             this.classList.add('loading');
             const { id, qty, ...properties} = this.dataset;
 
+            if (!id) {
+                console.log('Id is required')
+                return ;
+            }
+
             return this._addToCart({
                 items: [
                     {
@@ -53,7 +58,7 @@ if (!customElements.get('product-add-btn')) {
                 this.classList.remove('loading');
                 this.removeAttribute('aria-disabled');
             });;
-            console.log(cart);
+            console.log('Cart',cart);
         }
 
         /**

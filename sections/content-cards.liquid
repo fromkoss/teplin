@@ -1,4 +1,4 @@
-{{ 'section-content-cards.min.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'section-content-cards.min.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <div class="page-width content-cards">
     {%- if section.settings.title != blank -%}
